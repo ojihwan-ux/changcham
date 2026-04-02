@@ -747,6 +747,7 @@ async function serverLoadTeam(teamName) {
   let fetchUrl = `/api/team/${encodeURIComponent(teamName)}`;
   try {
     const res = await fetchWithTimeout(fetchUrl, {}, 4000);
+    if (res.ok) {
       const data = await res.json();
       if (data && Object.keys(data).filter(k => k !== '_savedAt').length > 0) {
         setServerStatus('on');
