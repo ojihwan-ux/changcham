@@ -1053,7 +1053,7 @@ function buildGeminiBody() {
 // ── 공통 메시지 전송 ───────────────────────────────────────────────────────
 async function sendMessage(userContent) {
   const serverUrl = getServerUrl();
-  const useServerProxy = serverKeyAvailable && serverUrl;
+  const useServerProxy = true;
 
   const localKey = getApiKey();
   if (!useServerProxy && !localKey) {
