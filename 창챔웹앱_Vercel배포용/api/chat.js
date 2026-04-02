@@ -9,7 +9,7 @@ export default async function handler(req) {
 
   try {
     const body = await req.json();
-    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:streamGenerateContent?key=${GEMINI_API_KEY}&alt=sse`;
+    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:streamGenerateContent?key=${GEMINI_API_KEY}&alt=sse`;
     
     const response = await fetch(geminiUrl, {
       method: 'POST',
