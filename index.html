@@ -472,7 +472,7 @@
   </div>
   <div class="header-right">
     <!-- 서버 연결 바 -->
-    <div class="server-bar">
+    <div class="server-bar" style="display: none;">
       <label>🖥 서버</label>
       <input type="text" id="serverUrlInput" placeholder="http://서버IP:5000"
         onkeydown="if(event.key==='Enter') connectServer()" />
@@ -492,7 +492,7 @@
     </div>
     <span class="save-indicator" id="saveIndicator">-</span>
     <!-- API KEY (선생님용) -->
-    <div class="api-bar">
+    <div class="api-bar" style="display: none;">
       <label>🔑 Gemini Key</label>
       <input type="password" id="apiKeyInput" placeholder="AIza..." autocomplete="off" />
       <button class="save-btn" onclick="saveApiKey()">로컬저장</button>
