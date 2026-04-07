@@ -433,9 +433,122 @@
       .chars-grid { grid-template-columns: 1fr 1fr; }
       .api-bar input { width: 140px; }
     }
+
+    /* ── 관리자 패널 ── */
+    #adminPanel {
+      display: none; position: fixed; inset: 0;
+      background: #0a0a14; z-index: 8000;
+      flex-direction: column; overflow: hidden;
+    }
+    #adminPanel.show { display: flex; }
+    .admin-header {
+      background: linear-gradient(135deg, #1a0533 0%, #0f1a2e 100%);
+      border-bottom: 2px solid var(--accent);
+      padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
+    }
+    .admin-header-left { display: flex; align-items: center; gap: 14px; }
+    .admin-logo { font-size: 1.5rem; }
+    .admin-title { font-size: 1.1rem; font-weight: 800; background: linear-gradient(90deg, #f59e0b, #ef4444); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .admin-subtitle { font-size: 0.7rem; color: var(--muted); margin-top: 2px; }
+    .admin-close-btn { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.4); color: #ef4444; font-size: 0.82rem; font-weight: 700; padding: 7px 16px; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+    .admin-close-btn:hover { background: rgba(239,68,68,0.3); }
+    .admin-tabs { display: flex; background: var(--panel); border-bottom: 1px solid var(--border); flex-shrink: 0; padding: 0 24px; gap: 0; }
+    .admin-tab { padding: 13px 24px; font-size: 0.85rem; font-weight: 700; color: var(--muted); cursor: pointer; border: none; background: transparent; border-bottom: 3px solid transparent; transition: all 0.2s; white-space: nowrap; }
+    .admin-tab.active { color: #f59e0b; border-bottom-color: #f59e0b; }
+    .admin-tab:hover:not(.active) { color: var(--text); }
+    .admin-body { flex: 1; overflow: hidden; display: flex; }
+    .admin-sidebar { width: 220px; flex-shrink: 0; background: var(--panel); border-right: 1px solid var(--border); overflow-y: auto; padding: 14px 0; }
+    .admin-sidebar-title { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; padding: 0 16px 10px; }
+    .admin-team-item { padding: 11px 16px; cursor: pointer; border-left: 3px solid transparent; transition: all 0.15s; }
+    .admin-team-item:hover { background: rgba(124,58,237,0.1); }
+    .admin-team-item.active { background: rgba(124,58,237,0.18); border-left-color: var(--accent); }
+    .admin-team-name { font-size: 0.85rem; font-weight: 700; color: var(--text); }
+    .admin-team-time { font-size: 0.65rem; color: var(--muted); margin-top: 3px; }
+    .admin-content { flex: 1; overflow-y: auto; padding: 24px; }
+    .admin-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--muted); font-size: 0.9rem; gap: 12px; }
+    .admin-empty-icon { font-size: 3rem; opacity: 0.4; }
+    .admin-team-title { font-size: 1.2rem; font-weight: 800; background: linear-gradient(90deg, #a78bfa, #38bdf8); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 6px; }
+    .admin-team-saved { font-size: 0.72rem; color: var(--muted); margin-bottom: 20px; }
+    .admin-section-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; color: var(--accent2); text-transform: uppercase; margin: 20px 0 10px; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+    .admin-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; margin-bottom: 8px; }
+    .admin-card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+    .admin-card-label { font-size: 0.65rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+    .admin-card-value { font-size: 0.83rem; color: var(--text); line-height: 1.6; white-space: pre-wrap; word-break: break-word; }
+    .admin-card-value.empty { color: var(--muted); font-style: italic; }
+    .admin-card.wide { grid-column: 1 / -1; }
+    .admin-card.accent-border { border-color: rgba(124,58,237,0.5); }
+    .admin-card.cyan-border { border-color: rgba(6,182,212,0.5); }
+    #adminTabContent2 { display: none; }
+    #adminTabContent2.show { display: block; }
+    #adminTabContent1 { display: flex; }
+    #adminTabContent1.hide { display: none; }
+    .admin-field-selector { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+    .admin-field-selector label { font-size: 0.78rem; color: var(--muted); font-weight: 600; }
+    .admin-field-select { background: var(--input-bg); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 0.85rem; padding: 8px 14px; outline: none; cursor: pointer; font-family: inherit; }
+    .admin-field-select:focus { border-color: #f59e0b; }
+    .admin-compare-table { width: 100%; border-collapse: collapse; }
+    .admin-compare-table th { background: var(--panel); border: 1px solid var(--border); padding: 10px 14px; font-size: 0.72rem; color: #f59e0b; text-align: left; font-weight: 700; white-space: nowrap; }
+    .admin-compare-table td { border: 1px solid var(--border); padding: 10px 14px; font-size: 0.82rem; color: var(--text); vertical-align: top; line-height: 1.6; white-space: pre-wrap; }
+    .admin-compare-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+    .admin-compare-table td.empty-cell { color: var(--muted); font-style: italic; }
+    .admin-refresh-btn { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.4); color: #f59e0b; font-size: 0.78rem; font-weight: 700; padding: 7px 14px; border-radius: 7px; cursor: pointer; transition: all 0.2s; }
+    .admin-refresh-btn:hover { background: rgba(245,158,11,0.28); }
+    .admin-count-badge { background: rgba(124,58,237,0.2); border: 1px solid rgba(124,58,237,0.4); color: #a78bfa; font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
   </style>
 </head>
 <body>
+
+<!-- ── 관리자 패널 ── -->
+<div id="adminPanel">
+  <div class="admin-header">
+    <div class="admin-header-left">
+      <div class="admin-logo">🛡️</div>
+      <div>
+        <div class="admin-title">관리자 대시보드</div>
+        <div class="admin-subtitle">2026 학생창의력 챔피언대회 – 팀 데이터 현황</div>
+      </div>
+      <span class="admin-count-badge" id="adminTeamCount">팀 0개</span>
+    </div>
+    <button class="admin-close-btn" onclick="closeAdminPanel()">✕ 나가기</button>
+  </div>
+  <div class="admin-tabs">
+    <button class="admin-tab active" id="adminTab1" onclick="switchAdminTab(1)">👥 팀별 보기</button>
+    <button class="admin-tab" id="adminTab2" onclick="switchAdminTab(2)">📋 항목별 보기</button>
+    <button class="admin-refresh-btn" style="margin-left:auto;align-self:center;" onclick="loadAdminData()">🔄 새로고침</button>
+  </div>
+  <div class="admin-body">
+    <div id="adminTabContent1">
+      <div class="admin-sidebar">
+        <div class="admin-sidebar-title">팀 목록</div>
+        <div id="adminTeamList"></div>
+      </div>
+      <div class="admin-content" id="adminTeamDetail">
+        <div class="admin-empty"><div class="admin-empty-icon">👆</div><div>좌측에서 팀을 선택하세요</div></div>
+      </div>
+    </div>
+    <div id="adminTabContent2" style="width:100%;padding:24px;overflow-y:auto;">
+      <div class="admin-field-selector">
+        <label>항목 선택:</label>
+        <select class="admin-field-select" id="adminFieldSelect" onchange="renderFieldView()">
+          <option value="f_original">원작 제목</option>
+          <option value="f_protagonist">공연 주인공</option>
+          <option value="f_audition">오디션 종류</option>
+          <option value="chars">등장인물 (전체)</option>
+          <option value="s_step1">STEP 1 – 원작 이야기</option>
+          <option value="s_step2">STEP 2 – 오디션 이야기</option>
+          <option value="s_step3">STEP 3 – 결말 이야기</option>
+          <option value="e1">① 배너 광고</option>
+          <option value="e2">② 장면 전환 연출</option>
+          <option value="e3">③ 신 스틸러</option>
+          <option value="e4">④ 별난 AI</option>
+          <option value="e5">⑤ 기발한 우승 상품</option>
+          <option value="scenario">시나리오 대본</option>
+        </select>
+      </div>
+      <div id="adminFieldTable"></div>
+    </div>
+  </div>
+</div>
 
 <!-- ── 팀 로그인 모달 ── -->
 <div id="loginModal" class="modal-overlay">
@@ -443,7 +556,9 @@
     <div class="modal-logo">🏆</div>
     <div class="modal-title">2026 학생창의력 챔피언대회</div>
     <div class="modal-sub">팀명을 입력하면 작업 내용이 자동으로 저장되고,<br>다른 기기에서 같은 팀명으로 입장하면 이어서 작업할 수 있습니다.</div>
+    <datalist id="teamNameHistory"></datalist>
     <input type="text" class="modal-input" id="teamNameInput" placeholder="팀명을 입력하세요 (예: 별난창의팀)" maxlength="20"
+      list="teamNameHistory"
       onkeydown="if(event.key==='Enter') checkTeamLogin()" />
 
     <!-- 기존 데이터 확인 박스 -->
@@ -780,6 +895,14 @@ async function checkTeamLogin() {
   const input = document.getElementById('teamNameInput');
   const name = input.value.trim();
   if (!name) { input.focus(); return; }
+
+  // ── 관리자 진입 분기 ──
+  if (name === '관리자') {
+    document.getElementById('loginModal').classList.add('hidden');
+    openAdminPanel();
+    return;
+  }
+
   pendingTeamName = name;
 
   // 버튼 로딩 표시
@@ -820,6 +943,9 @@ function enterWithTeam(name, doLoad) {
   currentTeam = name;
   document.getElementById('loginModal').classList.add('hidden');
   document.getElementById('teamNameDisplay').textContent = name;
+
+  // 팀 이름 히스토리 저장
+  saveTeamNameHistory(name);
 
   if (doLoad && pendingSavedData) {
     setAllFormData(pendingSavedData);
@@ -987,6 +1113,7 @@ window.onload = async function() {
   }
 
   document.getElementById('teamNameInput').focus();
+  renderTeamNameHistory();
 };
 
 function updateCharCount() {
@@ -1202,6 +1329,204 @@ function resetChat() {
   conversationHistory = [];
   document.getElementById('chatMessages').innerHTML = '';
   appendMessage('judge', '대화가 초기화되었습니다. 새 해결계획서를 제출하거나 질문을 입력하십시오.');
+}
+
+// ── 팀 이름 히스토리 ──────────────────────────────────────────────────────
+const TEAM_HISTORY_KEY = 'champ2026_team_history';
+
+function saveTeamNameHistory(teamName) {
+  let history = getTeamNameHistory();
+  history = [teamName, ...history.filter(n => n !== teamName)].slice(0, 10);
+  localStorage.setItem(TEAM_HISTORY_KEY, JSON.stringify(history));
+  renderTeamNameHistory();
+}
+
+function getTeamNameHistory() {
+  try { return JSON.parse(localStorage.getItem(TEAM_HISTORY_KEY) || '[]'); } catch { return []; }
+}
+
+function renderTeamNameHistory() {
+  const datalist = document.getElementById('teamNameHistory');
+  if (!datalist) return;
+  datalist.innerHTML = '';
+  getTeamNameHistory().forEach(name => {
+    const opt = document.createElement('option');
+    opt.value = name;
+    datalist.appendChild(opt);
+  });
+}
+
+// ── 관리자 패널 ────────────────────────────────────────────────────────────
+let adminTeamsCache = {};
+
+function openAdminPanel() {
+  document.getElementById('adminPanel').classList.add('show');
+  loadAdminData();
+}
+
+function closeAdminPanel() {
+  document.getElementById('adminPanel').classList.remove('show');
+  document.getElementById('teamNameInput').value = '';
+  document.getElementById('loginModal').classList.remove('hidden');
+}
+
+function switchAdminTab(tab) {
+  document.getElementById('adminTab1').classList.toggle('active', tab === 1);
+  document.getElementById('adminTab2').classList.toggle('active', tab === 2);
+  document.getElementById('adminTabContent1').classList.toggle('hide', tab !== 1);
+  document.getElementById('adminTabContent2').classList.toggle('show', tab === 2);
+  if (tab === 2) renderFieldView();
+}
+
+async function loadAdminData() {
+  adminTeamsCache = {};
+  const listEl = document.getElementById('adminTeamList');
+  listEl.innerHTML = '<div style="padding:16px;font-size:0.75rem;color:var(--muted);">로딩 중…</div>';
+
+  // 서버에서 팀 목록 가져오기
+  try {
+    const res = await fetchWithTimeout('/api/teams', {}, 6000);
+    if (res.ok) {
+      const list = await res.json();
+      const teamEntries = Array.isArray(list)
+        ? list.map(t => typeof t === 'string' ? { name: t, savedAt: '' } : t)
+        : Object.entries(list).map(([k, v]) => ({ name: k, savedAt: v._savedAt || v.savedAt || '' }));
+
+      document.getElementById('adminTeamCount').textContent = `팀 ${teamEntries.length}개`;
+      listEl.innerHTML = '';
+
+      if (teamEntries.length === 0) {
+        listEl.innerHTML = '<div style="padding:16px;font-size:0.75rem;color:var(--muted);">(데이터 없음)</div>';
+        return;
+      }
+
+      teamEntries.sort((a, b) => new Date(b.savedAt) - new Date(a.savedAt));
+      teamEntries.forEach(t => {
+        const item = document.createElement('div');
+        item.className = 'admin-team-item';
+        item.innerHTML = `<div class="admin-team-name">${escHtml(t.name)}</div>
+          <div class="admin-team-time">${t.savedAt ? new Date(t.savedAt).toLocaleString('ko-KR') : ''}</div>`;
+        item.onclick = () => selectAdminTeam(t.name, item);
+        listEl.appendChild(item);
+      });
+      return;
+    }
+  } catch {}
+
+  // 서버 실패 시 localStorage 폴백
+  const localTeams = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key && key.startsWith(STORAGE_PREFIX)) {
+      const tName = key.slice(STORAGE_PREFIX.length);
+      try {
+        const d = JSON.parse(localStorage.getItem(key));
+        adminTeamsCache[tName] = d;
+        localTeams.push({ name: tName, savedAt: d._savedAt || '' });
+      } catch {}
+    }
+  }
+
+  document.getElementById('adminTeamCount').textContent = `팀 ${localTeams.length}개`;
+  listEl.innerHTML = '';
+
+  if (localTeams.length === 0) {
+    listEl.innerHTML = '<div style="padding:16px;font-size:0.75rem;color:var(--muted);">(데이터 없음)</div>';
+    return;
+  }
+
+  localTeams.sort((a, b) => new Date(b.savedAt) - new Date(a.savedAt));
+  localTeams.forEach(t => {
+    const item = document.createElement('div');
+    item.className = 'admin-team-item';
+    item.innerHTML = `<div class="admin-team-name">${escHtml(t.name)}</div>
+      <div class="admin-team-time">${t.savedAt ? new Date(t.savedAt).toLocaleString('ko-KR') : ''}</div>`;
+    item.onclick = () => selectAdminTeam(t.name, item);
+    listEl.appendChild(item);
+  });
+}
+
+async function selectAdminTeam(teamName, itemEl) {
+  document.querySelectorAll('.admin-team-item').forEach(el => el.classList.remove('active'));
+  itemEl.classList.add('active');
+
+  const detail = document.getElementById('adminTeamDetail');
+  detail.innerHTML = '<div class="admin-empty"><div class="admin-empty-icon">⏳</div><div>로딩 중…</div></div>';
+
+  let data = adminTeamsCache[teamName];
+  if (!data) {
+    try {
+      const res = await fetchWithTimeout(`/api/team/${encodeURIComponent(teamName)}`, {}, 4000);
+      if (res.ok) { data = await res.json(); if (data) adminTeamsCache[teamName] = data; }
+    } catch {}
+  }
+  if (!data) {
+    const raw = localStorage.getItem(STORAGE_PREFIX + teamName);
+    if (raw) { try { data = JSON.parse(raw); adminTeamsCache[teamName] = data; } catch {} }
+  }
+  if (!data) {
+    detail.innerHTML = '<div class="admin-empty"><div>데이터를 불러올 수 없습니다.</div></div>';
+    return;
+  }
+
+  const g = field => {
+    const v = data[field];
+    return (v && v.trim()) ? escHtml(v) : '<span class="empty">미작성</span>';
+  };
+  const chars = [1,2,3,4,5,6].map(i => data['char'+i]).filter(Boolean).join(', ');
+  const savedAt = data._savedAt ? new Date(data._savedAt).toLocaleString('ko-KR') : '알 수 없음';
+
+  detail.innerHTML = `
+    <div class="admin-team-title">👥 ${escHtml(teamName)} 팀</div>
+    <div class="admin-team-saved">마지막 저장: ${savedAt}</div>
+    <div class="admin-section-label">기본 정보</div>
+    <div class="admin-cards-grid">
+      <div class="admin-card accent-border"><div class="admin-card-label">원작 제목</div><div class="admin-card-value">${g('f_original')}</div></div>
+      <div class="admin-card accent-border"><div class="admin-card-label">공연 주인공</div><div class="admin-card-value">${g('f_protagonist')}</div></div>
+      <div class="admin-card accent-border"><div class="admin-card-label">오디션 종류</div><div class="admin-card-value">${g('f_audition')}</div></div>
+      <div class="admin-card cyan-border"><div class="admin-card-label">등장인물</div><div class="admin-card-value">${chars ? escHtml(chars) : '<span class="empty">미작성</span>'}</div></div>
+    </div>
+    <div class="admin-section-label">3단계 구성</div>
+    <div class="admin-cards-grid">
+      <div class="admin-card"><div class="admin-card-label">STEP 1 – 원작 이야기</div><div class="admin-card-value">${g('s_step1')}</div></div>
+      <div class="admin-card"><div class="admin-card-label">STEP 2 – 오디션 이야기</div><div class="admin-card-value">${g('s_step2')}</div></div>
+      <div class="admin-card"><div class="admin-card-label">STEP 3 – 결말 이야기</div><div class="admin-card-value">${g('s_step3')}</div></div>
+    </div>
+    <div class="admin-section-label">5대 필수 요소</div>
+    <div class="admin-cards-grid">
+      <div class="admin-card wide"><div class="admin-card-label">① 배너 광고</div><div class="admin-card-value">${g('e1')}</div></div>
+      <div class="admin-card wide"><div class="admin-card-label">② 장면 전환 연출</div><div class="admin-card-value">${g('e2')}</div></div>
+      <div class="admin-card wide"><div class="admin-card-label">③ 신 스틸러</div><div class="admin-card-value">${g('e3')}</div></div>
+      <div class="admin-card wide"><div class="admin-card-label">④ 별난 AI</div><div class="admin-card-value">${g('e4')}</div></div>
+      <div class="admin-card wide"><div class="admin-card-label">⑤ 기발한 우승 상품</div><div class="admin-card-value">${g('e5')}</div></div>
+    </div>
+    ${data.scenario && data.scenario.trim() ? `
+    <div class="admin-section-label">시나리오 대본 (${data.scenario.length}자)</div>
+    <div class="admin-cards-grid"><div class="admin-card wide"><div class="admin-card-value">${escHtml(data.scenario)}</div></div></div>` : ''}
+  `;
+}
+
+function renderFieldView() {
+  const field = document.getElementById('adminFieldSelect').value;
+  const teams = Object.keys(adminTeamsCache);
+  const tableEl = document.getElementById('adminFieldTable');
+  if (teams.length === 0) {
+    tableEl.innerHTML = '<div style="color:var(--muted);font-size:0.85rem;">팀별 보기에서 팀 이름을 클릭해 데이터를 먼저 로드하세요.</div>';
+    return;
+  }
+  const fieldLabels = { f_original:'원작 제목', f_protagonist:'공연 주인공', f_audition:'오디션 종류', chars:'등장인물', s_step1:'STEP 1', s_step2:'STEP 2', s_step3:'STEP 3', e1:'① 배너 광고', e2:'② 장면 전환', e3:'③ 신 스틸러', e4:'④ 별난 AI', e5:'⑤ 우승 상품', scenario:'시나리오' };
+  const getVal = (data, f) => f === 'chars' ? [1,2,3,4,5,6].map(i => data['char'+i]).filter(Boolean).join(', ') : (data[f] || '');
+  let html = `<table class="admin-compare-table"><thead><tr><th>팀명</th><th>${escHtml(fieldLabels[field]||field)}</th></tr></thead><tbody>`;
+  teams.forEach(tName => {
+    const val = getVal(adminTeamsCache[tName], field);
+    html += `<tr><td style="font-weight:700;color:#a78bfa;width:140px;white-space:nowrap;">${escHtml(tName)}</td><td class="${val?'':'empty-cell'}">${val?escHtml(val):'미작성'}</td></tr>`;
+  });
+  html += '</tbody></table>';
+  tableEl.innerHTML = html;
+}
+
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 </script>
 </body>
