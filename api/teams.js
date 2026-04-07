@@ -11,8 +11,8 @@ async function kvGet(kvUrl, kvToken, key) {
 }
 
 export default async function handler(req) {
-  const KV_URL = process.env.KV_REST_API_URL;
-  const KV_TOKEN = process.env.KV_REST_API_TOKEN;
+  const KV_URL = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || process.env.KV_URL;
+  const KV_TOKEN = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_READ_ONLY_TOKEN;
 
   if (req.method === 'OPTIONS') {
     return new Response(null, {
