@@ -1,5 +1,18 @@
 export const config = { runtime: 'edge' };
 
+function getKvCredentials() {
+  let url = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
+  let token = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+  if (!url && process.env.REDIS_URL) {
+    try {
+      const parsed = new URL(process.env.REDIS_URL);
+      url = `https://${parsed.hostname}`;
+      token = parsed.password;
+    } catch {}
+  }
+  return { url, token };
+}
+
 async function kvGet(kvUrl, kvToken, key) {
   const res = await fetch(`${kvUrl}/`, {
     method: 'POST',
@@ -11,8 +24,7 @@ async function kvGet(kvUrl, kvToken, key) {
 }
 
 export default async function handler(req) {
-  const KV_URL = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || process.env.KV_URL;
-  const KV_TOKEN = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_READ_ONLY_TOKEN;
+  const { url: KV_URL, token: KV_TOKEN } = getKvCredentials();
 
   if (req.method === 'OPTIONS') {
     return new Response(null, {
