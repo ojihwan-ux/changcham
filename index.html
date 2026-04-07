@@ -1461,7 +1461,7 @@ async function loadAdminData() {
       });
       return;
     }
-  } catch {}
+  } catch (e) { console.error('[관리자] 팀 목록 서버 조회 실패:', e); }
 
   // 서버 실패 시 localStorage 폴백
   const localTeams = [];
@@ -1508,11 +1508,11 @@ async function selectAdminTeam(teamName, itemEl) {
     try {
       const res = await fetchWithTimeout(`/api/team/${encodeURIComponent(teamName)}`, {}, 4000);
       if (res.ok) { data = await res.json(); if (data) adminTeamsCache[teamName] = data; }
-    } catch {}
+    } catch (e) { console.error('[관리자] 팀 상세 서버 조회 실패:', e); }
   }
   if (!data) {
     const raw = localStorage.getItem(STORAGE_PREFIX + teamName);
-    if (raw) { try { data = JSON.parse(raw); adminTeamsCache[teamName] = data; } catch {} }
+    if (raw) { try { data = JSON.parse(raw); adminTeamsCache[teamName] = data; } catch (e) { console.error('[관리자] localStorage 파싱 실패:', e); } }
   }
   if (!data) {
     detail.innerHTML = '<div class="admin-empty"><div>데이터를 불러올 수 없습니다.</div></div>';
