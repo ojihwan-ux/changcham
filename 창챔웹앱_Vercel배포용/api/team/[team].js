@@ -74,6 +74,23 @@ export default async function handler(req) {
         await kvSet(KV_URL, KV_TOKEN, 'all_teams', JSON.stringify(allTeams));
       }
 
+      // 3) 구글 Docs 자동 연동 백업 (GAS 웹훅)
+      const WEBHOOK_URL = process.env.GAS_WEBHOOK_URL;
+      if (WEBHOOK_URL) {
+        try {
+          const parsedData = JSON.parse(bodyText);
+          const payload = JSON.stringify({ team_name: teamName, team_data: parsedData });
+          await fetch(WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: payload,
+            redirect: 'follow'
+          });
+        } catch (err) {
+          console.error('Google Docs Backup Error:', err);
+        }
+      }
+
       return new Response('{"ok":true}', { headers });
     } catch {
       return new Response('{"ok":false}', { headers });
